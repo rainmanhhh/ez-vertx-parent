@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ez-vertx admin</title>
+</head>
+<body>
+<h3>
+  NOTICE: All params will be treated as string
+</h3>
+<form id="form" target="iframe" method="post" action="./_admin/deploy">
+  <label>apiKey:
+    <input id="apiKey" name="_apiKey" style="width: 300px">
+  </label>
+  <br/>
+  <br/>
+  <label>verticle name to be redeployed. if not set, list all running verticles<br/>
+    <input id="verticleName" name="verticleName" style="width: 300px">
+  </label>
+  <br/>
+  <br/>
+  <div>
+    <button type="submit" style="width: 90%; height: 50px; text-align: center" onclick="return checkApiKey()">
+      submit
+    </button>
+  </div>
+</form>
+<iframe id="iframe" name="iframe"></iframe>
+</body>
+<script>
+  const COOKIE_KEY = 'apiKey'
+  document.getElementById('apiKey').value = cookie(COOKIE_KEY) || ''
+
+  /**
+   *
+   * @type {HTMLIFrameElement}
+   */
+  const iframe = document.getElementById('iframe')
+  iframe.onload = function () {
+    iframe.contentDocument
+  }
+
+  function checkApiKey() {
+    const apiKeyInput = document.getElementById('apiKey')
+    const apiKey = apiKeyInput.value
+    if (apiKey) {
+      cookie(COOKIE_KEY, apiKey)
+      return true
+    } else {
+      alert('apiKey should not be empty')
+      return false
+    }
+  }
+
+  function cookie(name, value, maxAge = 86400 * 10000) {
+    if (value === undefined) { // get cookie
+      const reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)")
+      const arr = document.cookie.match(reg)
+      if (arr && arr.length > 2)
+        return decodeURIComponent(arr[2])
+      else
+        return null
+    } else if (value) { // set cookie
+      document.cookie = name + '=' + value + ';max-age=' + maxAge
+    } else { // remove cookie
+      document.cookie = name + '=;max-age=0'
+    }
+  }
+</script>
+</html>
