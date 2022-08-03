@@ -29,12 +29,6 @@
     <maven.compiler.compilerVersion>11</maven.compiler.compilerVersion>
   </properties>
 
-  <modules>
-    <module>ez-vertx-core</module>
-    <module>ez-vertx-web-proxy</module>
-    <module>ez-vertx-dotnetws-proxy</module>
-  </modules>
-
   <dependencyManagement>
     <dependencies>
       <dependency>

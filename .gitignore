@@ -187,6 +187,3 @@ nbdist/
 logs/
 out/
 .idea/
-conf/
-verticles/
-file-uploads/
